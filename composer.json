@@ -1,0 +1,48 @@
+{
+    "name": "ellipse/providers-session",
+    "type": "service-provider",
+    "description": "Provider package for ellipse session",
+    "keywords": [
+        "psr-15",
+        "middleware",
+        "session",
+        "handler",
+        "session-handler",
+        "validation",
+        "ownership"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/ellipsephp/providers-session",
+    "support": {
+        "issues": "https://github.com/ellipsephp/providers-session/issues",
+        "source": "https://github.com/ellipsephp/providers-session"
+    },
+    "authors": [
+        {
+            "name": "pmall",
+            "email": "pierre.mallinjoud@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "container-interop/service-provider": "^0.4.0",
+        "psr/container": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "ellipse/providers": "^0.2",
+        "ellipse/providers-installer": "^0.3",
+        "ellipse/session-handler": "^1.0",
+        "ellipse/session-start": "^1.0",
+        "ellipse/session-validation": "^1.0"
+    },
+    "require-dev": {
+        "kahlan/kahlan": "^4.0",
+        "eloquent/phony-kahlan": "^1.0",
+        "ellipse/container": "^0.4.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ellipse\\Session\\": "src"
+        }
+    }
+}

@@ -18,6 +18,26 @@ use Ellipse\Session\ValidateSessionMiddleware;
 
 class SessionServiceProvider implements ServiceProviderInterface
 {
+    /**
+     * The user defined service extensions.
+     *
+     * @var array
+     */
+    private $extensions;
+
+    /**
+     * Set up a session service provider with the given extensions.
+     *
+     * @param array $extensions
+     */
+    public function __construct(array $extensions = [])
+    {
+        $this->extensions = $extensions;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getFactories()
     {
         return [
@@ -34,9 +54,12 @@ class SessionServiceProvider implements ServiceProviderInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getExtensions()
     {
-        return [];
+        return $this->extensions;
     }
 
     /**

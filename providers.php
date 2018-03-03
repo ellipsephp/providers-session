@@ -2,10 +2,10 @@
 
 use Psr\Cache\CacheItemPoolInterface;
 
-use Ellipse\Session\ExtendedSessionServiceProvider;
+use Ellipse\Session\SessionServiceProvider;
 
 return [
-    new ExtendedSessionServiceProvider([
+    new SessionServiceProvider([
 
         /**
          * Return the session id prefix. Default to 'ellipse_'.

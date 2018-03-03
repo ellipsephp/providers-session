@@ -1,12 +1,14 @@
 {
     "name": "ellipse/providers-session",
     "type": "service-provider",
-    "description": "Provider package for ellipse session",
+    "description": "Service provider for Ellipse Session middleware",
     "keywords": [
+        "psr-11",
         "psr-15",
+        "container",
+        "service-provider",
         "middleware",
         "session",
-        "handler",
         "session-handler",
         "validation",
         "ownership"
@@ -32,8 +34,7 @@
         "cache/session-handler": "^1.0",
         "cache/filesystem-adapter": "^1.0",
         "league/flysystem": "^1.0",
-        "ellipse/providers": "^0.2",
-        "ellipse/providers-installer": "^0.3",
+        "services/installer": "^0.5",
         "ellipse/session-handler": "^1.0",
         "ellipse/session-start": "^1.0",
         "ellipse/session-validation": "^1.0"

@@ -1,12 +1,11 @@
 <?php
 
-use Cache\SessionHandler\Psr6SessionHandler;
+use Psr\Cache\CacheItemPoolInterface;
 
 use Ellipse\Container;
 use Ellipse\Session\SetSessionHandlerMiddleware;
 use Ellipse\Session\StartSessionMiddleware;
 use Ellipse\Session\ValidateSessionMiddleware;
-use Ellipse\Session\DefaultSessionCacheItemPool;
 use Ellipse\Session\DefaultSessionOwnershipSignature;
 
 describe('providers.php', function () {
@@ -25,11 +24,19 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an implementation of Psr6SessionHandler for the SessionHandlerInterface::class alias', function () {
+        it('should provide an implementation of SessionHandlerInterface for the SessionHandlerInterface::class alias', function () {
 
             $test = $this->container->get(SessionHandlerInterface::class);
 
-            expect($test)->toBeAnInstanceOf(Psr6SessionHandler::class);
+            expect($test)->toBeAnInstanceOf(SessionHandlerInterface::class);
+
+        });
+
+        it('should provide an instance of SetSessionHandlerMiddleware for the SetSessionHandlerMiddleware::class alias', function () {
+
+            $test = $this->container->get(SetSessionHandlerMiddleware::class);
+
+            expect($test)->toBeAnInstanceOf(SetSessionHandlerMiddleware::class);
 
         });
 
@@ -49,43 +56,43 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide ellipse_ for the ellipse.session.id.prefix alias', function () {
+        it('should provide a string for the ellipse.session.id.prefix alias', function () {
 
             $test = $this->container->get('ellipse.session.id.prefix');
 
-            expect($test)->toEqual('ellipse_');
+            expect($test)->toBeA('string');
 
         });
 
-        it('should provide 3600 for the ellipse.session.ttl alias', function () {
+        it('should provide an integer for the ellipse.session.ttl alias', function () {
 
             $test = $this->container->get('ellipse.session.ttl');
 
-            expect($test)->toEqual(3600);
+            expect($test)->toBeAn('integer');
 
         });
 
-        it('should provide an empty array for the ellipse.session.cookie.options alias', function () {
+        it('should provide an array for the ellipse.session.cookie.options alias', function () {
 
             $test = $this->container->get('ellipse.session.cookie.options');
 
-            expect($test)->toEqual([]);
+            expect($test)->toBeAn('array');
 
         });
 
-        it('should provide an instance of DefaultSessionCacheItemPool for the ellipse.session.cache alias', function () {
+        it('should provide an instance of CacheItemPoolInterface for the ellipse.session.cache alias', function () {
 
             $test = $this->container->get('ellipse.session.cache');
 
-            expect($test)->toBeAnInstanceOf(DefaultSessionCacheItemPool::class);
+            expect($test)->toBeAnInstanceOf(CacheItemPoolInterface::class);
 
         });
 
-        it('should provide an empty array for the ellipse.session.ownership.attributes alias', function () {
+        it('should provide an array for the ellipse.session.ownership.attributes alias', function () {
 
             $test = $this->container->get('ellipse.session.ownership.attributes');
 
-            expect($test)->toEqual([]);
+            expect($test)->toBeAn('array');
 
         });
 

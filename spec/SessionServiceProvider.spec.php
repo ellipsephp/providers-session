@@ -1,5 +1,10 @@
 <?php
 
+use function Eloquent\Phony\Kahlan\stub;
+use function Eloquent\Phony\Kahlan\mock;
+
+use Psr\Cache\CacheItemPoolInterface;
+
 use Interop\Container\ServiceProviderInterface;
 
 use Cache\SessionHandler\Psr6SessionHandler;
@@ -34,27 +39,76 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an implementation of Psr6SessionHandler for the SessionHandlerInterface::class alias', function () {
+        it('should provide an instance of Psr6SessionHandler wrapped around the cache implementation for the SessionHandlerInterface::class alias', function () {
+
+            $cache = mock(CacheItemPoolInterface::class)->get();
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.cache')
+                ->andReturn($cache);
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.id.prefix')
+                ->andReturn('prefix');
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.ttl')
+                ->andReturn(3600);
 
             $test = $this->container->get(SessionHandlerInterface::class);
 
-            expect($test)->toBeAnInstanceOf(Psr6SessionHandler::class);
+            $handler = new Psr6SessionHandler($cache, [
+                'prefix' => 'prefix',
+                'ttl' => 3600,
+            ]);
+
+            expect($test)->toEqual($handler);
 
         });
 
-        it('should provide an instance of StartSessionMiddleware for the StartSessionMiddleware::class alias', function () {
+        it('should provide an instance of SetSessionHandlerMiddleware using the session handler for the StartSessionMiddleware::class alias', function () {
+
+            $handler = mock(SessionHandlerInterface::class)->get();
+
+            allow($this->container)->toReceive('get')
+                ->with(SessionHandlerInterface::class)
+                ->andReturn($handler);
+
+            $test = $this->container->get(SetSessionHandlerMiddleware::class);
+
+            $middleware = new SetSessionHandlerMiddleware($handler);
+
+            expect($test)->toEqual($middleware);
+
+        });
+
+        it('should provide an instance of StartSessionMiddleware using the cookie options for the StartSessionMiddleware::class alias', function () {
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.cookie.options')
+                ->andReturn(['options']);
 
             $test = $this->container->get(StartSessionMiddleware::class);
 
-            expect($test)->toBeAnInstanceOf(StartSessionMiddleware::class);
+            $middleware = new StartSessionMiddleware(['options']);
+
+            expect($test)->toEqual($middleware);
 
         });
 
-        it('should provide an instance of ValidateSessionMiddleware for the ValidateSessionMiddleware::class alias', function () {
+        it('should provide an instance of ValidateSessionMiddleware using the ownership signature for the ValidateSessionMiddleware::class alias', function () {
+
+            $signature = stub();
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.ownership.signature')
+                ->andReturn($signature);
 
             $test = $this->container->get(ValidateSessionMiddleware::class);
 
-            expect($test)->toBeAnInstanceOf(ValidateSessionMiddleware::class);
+            $middleware = new ValidateSessionMiddleware($signature);
+
+            expect($test)->toEqual($middleware);
 
         });
 
@@ -98,11 +152,17 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of DefaultSessionOwnershipSignature for the ellipse.session.ownership.signature alias', function () {
+        it('should provide an instance of DefaultSessionOwnershipSignature using the ownership attributes for the ellipse.session.ownership.signature alias', function () {
+
+            allow($this->container)->toReceive('get')
+                ->with('ellipse.session.ownership.attributes')
+                ->andReturn(['attribute']);
 
             $test = $this->container->get('ellipse.session.ownership.signature');
 
-            expect($test)->toBeAnInstanceOf(DefaultSessionOwnershipSignature::class);
+            $signature = new DefaultSessionOwnershipSignature(['attribute']);
+
+            expect($test)->toEqual($signature);
 
         });
 

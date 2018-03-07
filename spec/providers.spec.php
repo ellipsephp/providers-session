@@ -24,7 +24,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an implementation of SessionHandlerInterface for the SessionHandlerInterface::class alias', function () {
+        it('should provide an implementation of SessionHandlerInterface for the SessionHandlerInterface::class id', function () {
 
             $test = $this->container->get(SessionHandlerInterface::class);
 
@@ -32,7 +32,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an instance of SetSessionHandlerMiddleware for the SetSessionHandlerMiddleware::class alias', function () {
+        it('should provide an instance of SetSessionHandlerMiddleware for the SetSessionHandlerMiddleware::class id', function () {
 
             $test = $this->container->get(SetSessionHandlerMiddleware::class);
 
@@ -40,7 +40,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an instance of StartSessionMiddleware for the StartSessionMiddleware::class alias', function () {
+        it('should provide an instance of StartSessionMiddleware for the StartSessionMiddleware::class id', function () {
 
             $test = $this->container->get(StartSessionMiddleware::class);
 
@@ -48,7 +48,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an instance of ValidateSessionMiddleware for the ValidateSessionMiddleware::class alias', function () {
+        it('should provide an instance of ValidateSessionMiddleware for the ValidateSessionMiddleware::class id', function () {
 
             $test = $this->container->get(ValidateSessionMiddleware::class);
 
@@ -56,7 +56,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide a string for the ellipse.session.id.prefix alias', function () {
+        it('should provide a string for the ellipse.session.id.prefix id', function () {
 
             $test = $this->container->get('ellipse.session.id.prefix');
 
@@ -64,7 +64,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an integer for the ellipse.session.ttl alias', function () {
+        it('should provide an integer for the ellipse.session.ttl id', function () {
 
             $test = $this->container->get('ellipse.session.ttl');
 
@@ -72,7 +72,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an array for the ellipse.session.cookie.options alias', function () {
+        it('should provide an array for the ellipse.session.cookie.options id', function () {
 
             $test = $this->container->get('ellipse.session.cookie.options');
 
@@ -80,7 +80,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an instance of CacheItemPoolInterface for the ellipse.session.cache alias', function () {
+        it('should provide an instance of CacheItemPoolInterface for the ellipse.session.cache id', function () {
 
             $test = $this->container->get('ellipse.session.cache');
 
@@ -88,7 +88,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an array for the ellipse.session.ownership.attributes alias', function () {
+        it('should provide an array for the ellipse.session.ownership.attributes id', function () {
 
             $test = $this->container->get('ellipse.session.ownership.attributes');
 
@@ -96,7 +96,7 @@ describe('providers.php', function () {
 
         });
 
-        it('should provide an instance of DefaultSessionOwnershipSignature for the ellipse.session.ownership.signature alias', function () {
+        it('should provide an instance of DefaultSessionOwnershipSignature for the ellipse.session.ownership.signature id', function () {
 
             $test = $this->container->get('ellipse.session.ownership.signature');
 

@@ -39,7 +39,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of Psr6SessionHandler wrapped around the cache implementation for the SessionHandlerInterface::class alias', function () {
+        it('should provide an instance of Psr6SessionHandler wrapped around the cache implementation for the SessionHandlerInterface::class id', function () {
 
             $cache = mock(CacheItemPoolInterface::class)->get();
 
@@ -66,7 +66,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of SetSessionHandlerMiddleware using the session handler for the StartSessionMiddleware::class alias', function () {
+        it('should provide an instance of SetSessionHandlerMiddleware using the session handler for the StartSessionMiddleware::class id', function () {
 
             $handler = mock(SessionHandlerInterface::class)->get();
 
@@ -82,7 +82,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of StartSessionMiddleware using the cookie options for the StartSessionMiddleware::class alias', function () {
+        it('should provide an instance of StartSessionMiddleware using the cookie options for the StartSessionMiddleware::class id', function () {
 
             allow($this->container)->toReceive('get')
                 ->with('ellipse.session.cookie.options')
@@ -96,7 +96,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of ValidateSessionMiddleware using the ownership signature for the ValidateSessionMiddleware::class alias', function () {
+        it('should provide an instance of ValidateSessionMiddleware using the ownership signature for the ValidateSessionMiddleware::class id', function () {
 
             $signature = stub();
 
@@ -112,7 +112,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide ellipse_ for the ellipse.session.id.prefix alias', function () {
+        it('should provide ellipse_ for the ellipse.session.id.prefix id', function () {
 
             $test = $this->container->get('ellipse.session.id.prefix');
 
@@ -120,7 +120,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide 3600 for the ellipse.session.ttl alias', function () {
+        it('should provide 3600 for the ellipse.session.ttl id', function () {
 
             $test = $this->container->get('ellipse.session.ttl');
 
@@ -128,7 +128,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an empty array for the ellipse.session.cookie.options alias', function () {
+        it('should provide an empty array for the ellipse.session.cookie.options id', function () {
 
             $test = $this->container->get('ellipse.session.cookie.options');
 
@@ -136,7 +136,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of DefaultSessionCacheItemPool for the ellipse.session.cache alias', function () {
+        it('should provide an instance of DefaultSessionCacheItemPool for the ellipse.session.cache id', function () {
 
             $test = $this->container->get('ellipse.session.cache');
 
@@ -144,7 +144,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an empty array for the ellipse.session.ownership.attributes alias', function () {
+        it('should provide an empty array for the ellipse.session.ownership.attributes id', function () {
 
             $test = $this->container->get('ellipse.session.ownership.attributes');
 
@@ -152,7 +152,7 @@ describe('SessionServiceProvider', function () {
 
         });
 
-        it('should provide an instance of DefaultSessionOwnershipSignature using the ownership attributes for the ellipse.session.ownership.signature alias', function () {
+        it('should provide an instance of DefaultSessionOwnershipSignature using the ownership attributes for the ellipse.session.ownership.signature id', function () {
 
             allow($this->container)->toReceive('get')
                 ->with('ellipse.session.ownership.attributes')

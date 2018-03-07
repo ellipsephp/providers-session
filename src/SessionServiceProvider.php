@@ -36,6 +36,17 @@ class SessionServiceProvider implements ServiceProviderInterface
     }
 
     /**
+     * Return the prefixed version of the given id.
+     *
+     * @param string $id
+     * @return string
+     */
+    private function prefixed(string $id): string
+    {
+        return sprintf('ellipse.http.%s', $id);
+    }
+
+    /**
      * @inheritdoc
      */
     public function getFactories()
@@ -59,7 +70,12 @@ class SessionServiceProvider implements ServiceProviderInterface
      */
     public function getExtensions()
     {
-        return $this->extensions;
+        $ids = array_keys($this->extensions);
+        $callables = array_values($this->extensions);
+
+        $prefixed = array_map([$this, 'prefixed'], $ids);
+
+        return array_combine($prefixed, $callables);
     }
 
     /**
